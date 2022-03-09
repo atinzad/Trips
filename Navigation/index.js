@@ -7,10 +7,14 @@ import Signup from "../components/authentication/Signup";
 import Signin from "../components/authentication/Signin";
 import Test from "../components/Test";
 import TripList from "../components/trips/TripList";
+
 import SigninButton from "../components/Button/SigninButton";
 import authStore from "../stores/authStore";
 import SignoutButton from "../components/Button/SignoutButton";
 import { observer } from "mobx-react";
+
+import TripDetail from "../components/trips/TripDetail";
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -42,6 +46,7 @@ const RootNavigator = () => {
       />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
+      <Screen name="TripDetail" component={TripDetail} />
     </Navigator>
   );
 };

@@ -37,6 +37,39 @@ class AuthStore {
       console.log(error);
     }
   };
+
+  signin = async (user, navigation) => {
+    try {
+      const res = await instance.post("/users/signin", user);
+      const { token } = res.data;
+      //   localStorage.setItem("token", token);
+      await this.setUser(token);
+
+      navigation.replace("Home");
+      console.log(token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  checkForToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      console.log(token);
+      if (token) {
+        const decodedToken = decode(token);
+        console.log(decodedToken);
+
+        if (Date.now() < +decodedToken.exp) {
+          await this.setUser(token);
+        } else {
+          this.signout();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const authStore = new AuthStore();

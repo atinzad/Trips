@@ -3,27 +3,24 @@ import React, { useState } from "react";
 import { Button, HStack, VStack } from "native-base";
 import authStore from "../../stores/authStore";
 
-const Signup = ({ navigation }) => {
+const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
-    email: "",
-    firstName: "",
-    lastName: "",
   });
 
   const handleSubmit = async () => {
-    await authStore.signup(user, navigation);
+    await authStore.signin(user, navigation);
   };
 
   return (
     <VStack style={styles.container}>
-      <Text style={{ fontWeight: "bold" }}>Signup</Text>
+      <Text style={{ fontWeight: "bold" }}>Signin</Text>
       <VStack>
         <Text style={styles.title}>Username:</Text>
         <TextInput
           style={styles.input}
-          onChangeText={(username) => setUser({ ...user, username })}
+          onChangeText={(value) => setUser({ ...user, username: value })}
         />
       </VStack>
       <VStack>
@@ -31,42 +28,20 @@ const Signup = ({ navigation }) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          onChangeText={(password) => setUser({ ...user, password })}
+          onChangeText={(value) => setUser({ ...user, password: value })}
         />
       </VStack>
-      <VStack>
-        <Text style={styles.title}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(email) => setUser({ ...user, email })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>firstName:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(firstName) => setUser({ ...user, firstName })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>LastName:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(lastName) => setUser({ ...user, lastName })}
-        />
-      </VStack>
-
       <Button colorScheme="blue" onPress={handleSubmit}>
-        Signup
+        Signin
       </Button>
       <HStack>
-        <Text>Already user? </Text>
+        <Text>Not a user? </Text>
         <Pressable>
           <Text
-            onPress={() => navigation.navigate("Signin")}
+            onPress={() => navigation.navigate("Signup")}
             style={{ fontWeight: "bold" }}
           >
-            Signin
+            Signup
           </Text>
         </Pressable>
       </HStack>
@@ -74,7 +49,7 @@ const Signup = ({ navigation }) => {
   );
 };
 
-export default Signup;
+export default Signin;
 
 const styles = StyleSheet.create({
   container: {

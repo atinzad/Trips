@@ -8,16 +8,16 @@ class TestStore {
     makeAutoObservable(this);
   }
 
-  fetchUsers = async () => {
-    try {
-      const response = await instance.get("/users");
-      // console.log(response.data);
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  //   fetchUsers = async () => {
+  //     try {
+  //       const response = await instance.get("/users");
+  //       // console.log(response.data);
+  //     } catch (error) {
+  //       console.log("error");
+  //     }
+  //   };
 }
 
 const testStore = new TestStore();
-testStore.fetchUsers();
+// testStore.fetchUsers();
 export default testStore;

@@ -7,21 +7,45 @@ import Signup from "../components/authentication/Signup";
 import Signin from "../components/authentication/Signin";
 import Test from "../components/Test";
 import TripList from "../components/trips/TripList";
+import SigninButton from "../components/Button/SigninButton";
+import authStore from "../stores/authStore";
+import SignoutButton from "../components/Button/SignoutButton";
+import { observer } from "mobx-react";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
+  const handleHeader = () => {
+    return !authStore.user ? <SigninButton /> : <SignoutButton />;
+  };
   return (
-    <Navigator initialRouteName="Explore">
-      <Screen name="Home" component={Home} />
-      <Screen name="Test" component={Test} />
-      <Screen name="Explore" component={TripList} />
+    <Navigator initialRouteName="Home">
+      <Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerRight: handleHeader,
+        }}
+      />
+      <Screen
+        name="Test"
+        component={Test}
+        options={{
+          headerRight: () =>
+            !authStore.user ? <SigninButton /> : <SignoutButton />,
+        }}
+      />
+      <Screen
+        name="Explore"
+        component={TripList}
+        options={{ headerRight: () => <SigninButton /> }}
+      />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
     </Navigator>
   );
 };
 
-export default RootNavigator;
+export default observer(RootNavigator);
 
 const styles = StyleSheet.create({});

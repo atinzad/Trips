@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import decode from "jwt-decode";
 import { instance } from "./instance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 class AuthStore {
   user = null;
@@ -42,20 +43,31 @@ class AuthStore {
     try {
       const res = await instance.post("/users/signin", user);
       const { token } = res.data;
+
       //   localStorage.setItem("token", token);
       await this.setUser(token);
 
-      navigation.replace("Home");
+      navigation.navigate("Home");
     } catch (error) {
+      Alert.alert(
+        "Authentication failed",
+        "username or password is incorrect",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+      );
       console.log(error);
     }
   };
 
-  signout = async () => {
+  signout = async (navigation) => {
     try {
       // localStorage.removeItem("token");
       await AsyncStorage.removeItem("token");
       this.user = null;
+      Alert.alert(
+        "Authentication failed",
+        "username or password is incorrect",
+        [{ text: "OK", onPress: () => navigation.navigate("Home") }]
+      );
     } catch (error) {
       console.log(error);
     }

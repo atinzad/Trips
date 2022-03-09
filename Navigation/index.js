@@ -7,6 +7,7 @@ import Signup from "../components/authentication/Signup";
 import Signin from "../components/authentication/Signin";
 import Test from "../components/Test";
 import TripList from "../components/trips/TripList";
+import TripDetail from "../components/trips/TripDetail";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,6 +19,7 @@ const RootNavigator = () => {
       <Screen name="Explore" component={TripList} />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
+      <Screen name="TripDetail" component={TripDetail} />
     </Navigator>
   );
 };

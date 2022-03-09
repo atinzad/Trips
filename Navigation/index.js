@@ -6,14 +6,16 @@ import Home from "../components/Home";
 import Signup from "../components/authentication/Signup";
 import Signin from "../components/authentication/Signin";
 import Test from "../components/Test";
+import TripList from "../components/trips/TripList";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <Navigator initialRouteName="Home">
+    <Navigator initialRouteName="Explore">
       <Screen name="Home" component={Home} />
       <Screen name="Test" component={Test} />
+      <Screen name="Explore" component={TripList} />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
     </Navigator>

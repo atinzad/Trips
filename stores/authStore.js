@@ -52,6 +52,16 @@ class AuthStore {
     }
   };
 
+  signout = async () => {
+    try {
+      // localStorage.removeItem("token");
+      await AsyncStorage.removeItem("token");
+      this.user = null;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   checkForToken = async () => {
     try {
       const token = await AsyncStorage.getItem("token");

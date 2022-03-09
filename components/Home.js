@@ -3,7 +3,6 @@ import React from "react";
 import testStore from "../stores/testStore";
 
 const Home = () => {
-  console.log(testStore.users);
   return (
     <View style={styles.container}>
       <Text>Home</Text>

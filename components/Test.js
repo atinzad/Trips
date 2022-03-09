@@ -1,18 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import testStore from "../stores/testStore";
 import { Button } from "native-base";
+import authStore from "../stores/authStore";
 
-const Home = ({ navigation }) => {
+const Test = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-      <Button onPress={() => navigation.navigate("Test")}>Test</Button>
+    <View>
+      <Text>Test</Text>
+      {!authStore.user && (
+        <Button onPress={() => navigation.navigate("Signin")}>Sign in</Button>
+      )}
     </View>
   );
 };
 
-export default Home;
+export default Test;
 
 const styles = StyleSheet.create({
   container: {

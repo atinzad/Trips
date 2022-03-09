@@ -46,7 +46,6 @@ class AuthStore {
       await this.setUser(token);
 
       navigation.replace("Home");
-      console.log(token);
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +67,6 @@ class AuthStore {
       console.log(token);
       if (token) {
         const decodedToken = decode(token);
-        console.log(decodedToken);
 
         if (Date.now() < +decodedToken.exp) {
           await this.setUser(token);
@@ -83,4 +81,5 @@ class AuthStore {
 }
 
 const authStore = new AuthStore();
+authStore.checkForToken();
 export default authStore;

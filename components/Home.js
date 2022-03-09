@@ -2,17 +2,21 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import testStore from "../stores/testStore";
 import { Button } from "native-base";
+import { observer } from "mobx-react";
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
-      <Button onPress={() => navigation.navigate("Test")}>Test</Button>
+
+      <Button style={styles.btn} onPress={() => navigation.navigate("Explore")}>
+        Explore
+      </Button>
     </View>
   );
 };
 
-export default Home;
+export default observer(Home);
 
 const styles = StyleSheet.create({
   container: {
@@ -20,5 +24,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  btn: {
+    margin: 5,
+
+    width: 120,
   },
 });

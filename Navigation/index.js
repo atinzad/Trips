@@ -14,7 +14,10 @@ import SignoutButton from "../components/Button/SignoutButton";
 import { observer } from "mobx-react";
 
 import TripDetail from "../components/trips/TripDetail";
+import Profile from "../components/users/Profile";
+
 import AddTrip from "../components/trips/AddTrip";
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -22,6 +25,7 @@ const RootNavigator = () => {
   const handleHeader = () => {
     return !authStore.user ? <SigninButton /> : <SignoutButton />;
   };
+
   return (
     <Navigator initialRouteName="Home">
       <Screen
@@ -46,6 +50,7 @@ const RootNavigator = () => {
       />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
+      <Screen name="Profile" component={Profile} />
       <Screen name="TripDetail" component={TripDetail} />
       <Screen name="AddTrip" component={AddTrip} />
     </Navigator>

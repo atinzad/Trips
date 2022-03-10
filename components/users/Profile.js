@@ -6,7 +6,7 @@ import authStore from "../../stores/authStore";
 const Profile = ({ navigation }) => {
   user = authStore.user;
   return (
-    <View style={styles.StyleSheet}>
+    <View style={styles.container}>
       {user ? <ProfileView user={user} /> : navigation.replace("Signin")}
     </View>
   );

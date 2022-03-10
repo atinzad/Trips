@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, Pressable, Dimensions } from "react-native";
 import React from "react";
-import { HStack, VStack } from "native-base";
+import { Divider, HStack, VStack } from "native-base";
 
 const TripItem = ({ trip, navigation }) => {
   return (

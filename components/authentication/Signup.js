@@ -1,5 +1,11 @@
-import { Pressable, StyleSheet, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+} from "react-native";
+import React, { useRef, useState } from "react";
 import { Button, HStack, ScrollView, VStack } from "native-base";
 import authStore from "../../stores/authStore";
 
@@ -12,54 +18,90 @@ const Signup = ({ navigation }) => {
     lastName: "",
   });
 
+  const passwordInput = useRef();
+  const emailInput = useRef();
+  const firstInput = useRef();
+  const lastInput = useRef();
+
   const handleSubmit = async () => {
     await authStore.signup(user, navigation);
   };
 
   return (
     <VStack style={styles.container}>
-      <Text style={{ fontWeight: "bold" }}>Signup</Text>
-      <VStack>
-        <Text style={styles.title}>Username:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(username) => setUser({ ...user, username })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>Password:</Text>
-        <TextInput
-          style={styles.input}
-          secureTextEntry
-          onChangeText={(password) => setUser({ ...user, password })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(email) => setUser({ ...user, email })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>firstName:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(firstName) => setUser({ ...user, firstName })}
-        />
-      </VStack>
-      <VStack>
-        <Text style={styles.title}>LastName:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(lastName) => setUser({ ...user, lastName })}
-        />
-      </VStack>
+      <KeyboardAvoidingView behavior="position">
+        <Text style={{ left: "42%", fontWeight: "bold" }}>Signup</Text>
 
+        <VStack>
+          <Text style={styles.title}>Username:</Text>
+          <TextInput
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              passwordInput.current.focus();
+            }}
+            placeholder="username"
+            style={styles.input}
+            onChangeText={(username) => setUser({ ...user, username })}
+          />
+        </VStack>
+
+        <VStack>
+          <Text style={styles.title}>Password:</Text>
+          <TextInput
+            ref={passwordInput}
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              emailInput.current.focus();
+            }}
+            placeholder="password"
+            style={styles.input}
+            secureTextEntry
+            onChangeText={(password) => setUser({ ...user, password })}
+          />
+        </VStack>
+        <VStack>
+          <Text style={styles.title}>Email:</Text>
+          <TextInput
+            ref={emailInput}
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              firstInput.current.focus();
+            }}
+            placeholder="email@email.com"
+            style={styles.input}
+            onChangeText={(email) => setUser({ ...user, email })}
+          />
+        </VStack>
+        <VStack>
+          <Text style={styles.title}>firstName:</Text>
+          <TextInput
+            ref={firstInput}
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              lastInput.current.focus();
+            }}
+            placeholder="First Name"
+            style={styles.input}
+            onChangeText={(firstName) => setUser({ ...user, firstName })}
+          />
+        </VStack>
+
+        <VStack>
+          <Text style={styles.title}>LastName:</Text>
+          <TextInput
+            ref={lastInput}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
+            placeholder="Last Name"
+            style={styles.input}
+            onChangeText={(lastName) => setUser({ ...user, lastName })}
+          />
+        </VStack>
+      </KeyboardAvoidingView>
       <Button colorScheme="blue" onPress={handleSubmit}>
         Signup
       </Button>
-      <HStack>
+      <HStack style={{ margin: 10 }}>
         <Text>Already user? </Text>
         <Pressable>
           <Text
@@ -81,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    bottom: 80,
+    bottom: 100,
   },
 
   input: {

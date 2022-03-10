@@ -18,9 +18,11 @@ class AuthStore {
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
       //   console.log(token);
       // localStorage.setItem("token", token);
+      return this.user;
       await AsyncStorage.setItem("token", token);
     } catch (error) {
       console.log(error);
+      return null;
     }
   };
 
@@ -45,9 +47,16 @@ class AuthStore {
       const { token } = res.data;
 
       //   localStorage.setItem("token", token);
-      await this.setUser(token);
-
-      navigation.navigate("Home");
+      const res2 = await this.setUser(token);
+      if (!res2) {
+        Alert.alert(
+          "Authentication failed",
+          "username or password is incorrect",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+        );
+      } else {
+        navigation.navigate("Home");
+      }
     } catch (error) {
       Alert.alert(
         "Authentication failed",

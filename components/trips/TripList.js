@@ -3,14 +3,26 @@ import React from "react";
 import tripStore from "../../stores/tripStore";
 import TripItem from "./TripItem";
 import { observer } from "mobx-react";
-import { HStack, VStack } from "native-base";
+import { Center, HStack, ScrollView, VStack } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 
 const TripList = ({ navigation }) => {
   const trips = tripStore.trips.map((trip) => (
     <TripItem key={trip._id} trip={trip} navigation={navigation} />
   ));
 
-  return <VStack style={styles.container}>{trips}</VStack>;
+  return (
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <VStack>{trips}</VStack>
+      <Ionicons
+        style={styles.icon}
+        name="add-circle-outline"
+        size={70}
+        color="black"
+        onPress={() => navigation.navigate("AddTrip")}
+      />
+    </ScrollView>
+  );
 };
 
 export default observer(TripList);
@@ -21,5 +33,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     alignItems: "flex-start",
+  },
+  icon: {
+    left: "42%",
   },
 });

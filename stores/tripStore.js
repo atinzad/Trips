@@ -21,13 +21,10 @@ class TripStore {
   addTrip = async (newTrip) => {
     try {
       if (authStore.user) {
-        console.log(authStore.user);
         newTrip.owner = authStore.user._id;
-        console.log(newTrip);
         const response = await instance.post("/trips", newTrip);
-        console.log(response.data);
         this.trips.push(response.data.payload);
-        tripStore.fetchTrips();
+        await this.fetchTrips();
       }
     } catch (error) {
       console.log(

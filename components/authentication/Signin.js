@@ -34,7 +34,7 @@ const Signin = ({ navigation }) => {
       <Button colorScheme="blue" onPress={handleSubmit}>
         Signin
       </Button>
-      <HStack>
+      <HStack style={{ margin: 10 }}>
         <Text>Not a user? </Text>
         <Pressable>
           <Text

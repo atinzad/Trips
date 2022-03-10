@@ -16,6 +16,19 @@ class TripStore {
       console.log("error");
     }
   };
+
+  addTrip = async (newTrip) => {
+    try {
+      const response = await instance.post("/trips", newTrip);
+      console.log(response.data);
+      this.trips.push(response.data.payload);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: TripStore.js ~ line 16 ~ TripStore ~ addTrip= ~ error",
+        error
+      );
+    }
+  };
 }
 
 const tripStore = new TripStore();

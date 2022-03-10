@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput } from "react-native";
 import React, { useState } from "react";
-import { Button, HStack, VStack } from "native-base";
+import { Button, HStack, ScrollView, VStack } from "native-base";
 import authStore from "../../stores/authStore";
 
 const Signup = ({ navigation }) => {

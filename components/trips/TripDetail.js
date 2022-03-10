@@ -1,6 +1,7 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { VStack } from "native-base";
+import { observer } from "mobx-react";
 
 const TripDetail = ({ route }) => {
   const { trip } = route.params;

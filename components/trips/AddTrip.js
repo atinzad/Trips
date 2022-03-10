@@ -9,6 +9,7 @@ const AddTrip = () => {
     title: "",
     description: "",
     image: "",
+    owner: "",
   });
 
   const navigation = useNavigation();

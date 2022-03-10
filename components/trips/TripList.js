@@ -5,6 +5,7 @@ import TripItem from "./TripItem";
 import { observer } from "mobx-react";
 import { Center, HStack, ScrollView, VStack } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import authStore from "../../stores/authStore";
 
 const TripList = ({ navigation }) => {
   const trips = tripStore.trips.map((trip) => (
@@ -14,13 +15,15 @@ const TripList = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <VStack>{trips}</VStack>
-      <Ionicons
-        style={styles.icon}
-        name="add-circle-outline"
-        size={70}
-        color="black"
-        onPress={() => navigation.navigate("AddTrip")}
-      />
+      {authStore.user && (
+        <Ionicons
+          style={styles.icon}
+          name="add-circle-outline"
+          size={70}
+          color="black"
+          onPress={() => navigation.navigate("AddTrip")}
+        />
+      )}
     </ScrollView>
   );
 };

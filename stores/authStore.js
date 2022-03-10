@@ -63,11 +63,9 @@ class AuthStore {
       // localStorage.removeItem("token");
       await AsyncStorage.removeItem("token");
       this.user = null;
-      Alert.alert(
-        "Authentication failed",
-        "username or password is incorrect",
-        [{ text: "OK", onPress: () => navigation.navigate("Home") }]
-      );
+      Alert.alert("Signed out", "See you later", [
+        { text: "OK", onPress: () => navigation.navigate("Home") },
+      ]);
     } catch (error) {
       console.log(error);
     }

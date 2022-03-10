@@ -12,6 +12,9 @@ const Home = ({ navigation }) => {
       <Button style={styles.btn} onPress={() => navigation.navigate("Explore")}>
         Explore
       </Button>
+      <Button style={styles.btn} onPress={() => navigation.navigate("Profile")}>
+        Profile
+      </Button>
     </View>
   );
 };

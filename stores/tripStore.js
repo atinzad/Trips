@@ -33,6 +33,18 @@ class TripStore {
       );
     }
   };
+
+  deleteTrip = async (id) => {
+    try {
+      await instance.delete(`/trips/${id}`);
+      this.trips = this.trips.filter((trip) => trip._id !== id);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: TripStore.js ~ line 16 ~ TripStore ~ addTrip= ~ error",
+        error
+      );
+    }
+  };
 }
 
 const tripStore = new TripStore();

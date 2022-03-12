@@ -18,7 +18,6 @@ import Profile from "../components/users/Profile";
 
 import AddTrip from "../components/trips/AddTrip";
 
-
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
@@ -39,14 +38,13 @@ const RootNavigator = () => {
         name="Test"
         component={Test}
         options={{
-          headerRight: () =>
-            !authStore.user ? <SigninButton /> : <SignoutButton />,
+          headerRight: handleHeader,
         }}
       />
       <Screen
         name="Explore"
         component={TripList}
-        options={{ headerRight: () => <SigninButton /> }}
+        options={{ headerRight: handleHeader }}
       />
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />

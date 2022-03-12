@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, Pressable, Dimensions } from "react-native";
 import React from "react";
-import { Divider, HStack, VStack } from "native-base";
+import { Button, Divider, HStack, VStack } from "native-base";
+import { View } from "react-native-web";
 
 const TripItem = ({ trip, navigation }) => {
   return (
@@ -9,13 +10,14 @@ const TripItem = ({ trip, navigation }) => {
       onPress={() => navigation.navigate("TripDetail", { trip })}
     >
       <VStack style={styles.container}>
+        <Image style={styles.shadow} />
         <Image
           style={styles.image}
           source={{
             uri: trip.image,
           }}
         />
-        <Text>{trip.title}</Text>
+        <Text style={styles.title}>{trip.title}</Text>
       </VStack>
     </Pressable>
   );
@@ -34,6 +36,22 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 80,
+    height: 200,
+    position: "relative",
+  },
+  shadow: {
+    position: "absolute",
+    width: "100%",
+    height: 200,
+    backgroundColor: "rgba(0, 0, 0, 0.450)",
+    bottom: 10,
+    zIndex: 1,
+  },
+  title: {
+    position: "absolute",
+    color: "white",
+    fontSize: 25,
+    zIndex: 2,
+    fontWeight: "bold",
   },
 });

@@ -16,9 +16,11 @@ class AuthStore {
       const decodedToken = decode(token);
       this.user = decodedToken;
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-      //   console.log(token);
-      // localStorage.setItem("token", token);
+
+      
+
       await AsyncStorage.setItem("token", token);
+      return this.user;
     } catch (error) {
       console.log(error);
     }
@@ -28,12 +30,9 @@ class AuthStore {
     try {
       const res = await instance.post("/users/signup", user);
       const { token } = res.data;
-      //   localStorage.setItem("token", token);
 
       await this.setUser(token);
       navigation.replace("Home");
-
-      //   console.log(token);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +73,7 @@ class AuthStore {
   checkForToken = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
-      // console.log(token);
+
       if (token) {
         const decodedToken = decode(token);
         console.log(+decodedToken.exp);

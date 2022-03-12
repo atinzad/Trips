@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ProfileView from "./ProfileView";
 import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
 
 const Profile = ({ navigation }) => {
   user = authStore.user;
@@ -12,7 +13,7 @@ const Profile = ({ navigation }) => {
   );
 };
 
-export default Profile;
+export default observer(Profile);
 
 const styles = StyleSheet.create({
   container: {

@@ -27,6 +27,11 @@ const TripDetail = ({ route }) => {
     navigation.navigate("Explore");
   };
 
+  const handleUpdate = () => {
+    tripStore.updateTrip(trip);
+    navigation.navigate("Explore");
+  };
+
   return (
     <VStack style={styles.container}>
       <Image

@@ -16,11 +16,13 @@ class AuthStore {
       const decodedToken = decode(token);
       this.user = decodedToken;
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-      return this.user;
+
+      
+
       await AsyncStorage.setItem("token", token);
+      return this.user;
     } catch (error) {
       console.log(error);
-      return null;
     }
   };
 
@@ -42,16 +44,9 @@ class AuthStore {
       const { token } = res.data;
 
       //   localStorage.setItem("token", token);
-      const res2 = await this.setUser(token);
-      if (!res2) {
-        Alert.alert(
-          "Authentication failed",
-          "username or password is incorrect",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-        );
-      } else {
-        navigation.navigate("Home");
-      }
+      await this.setUser(token);
+
+      navigation.navigate("Home");
     } catch (error) {
       Alert.alert(
         "Authentication failed",
@@ -78,8 +73,11 @@ class AuthStore {
   checkForToken = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
+
       if (token) {
         const decodedToken = decode(token);
+        console.log(+decodedToken.exp);
+        console.log(Date.now());
 
         if (Date.now() < +decodedToken.exp) {
           await this.setUser(token);

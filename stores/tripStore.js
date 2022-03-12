@@ -45,6 +45,25 @@ class TripStore {
       );
     }
   };
+
+  updateTrip = async (updatedTrip) => {
+    try {
+      const response = await instance.put(
+        `/trips/${updatedTrip._id}`,
+        updatedTrip
+      );
+      if (response) {
+        this.trips = this.trips.map((trip) =>
+          trip._id === updatedTrip._id ? updatedTrip : trip
+        );
+      }
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: TripStore.js ~ line 16 ~ TripStore ~ updateTrip= ~ error",
+        error
+      );
+    }
+  };
 }
 
 const tripStore = new TripStore();

@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, HStack, VStack } from "native-base";
 import authStore from "../../stores/authStore";
 
@@ -13,12 +13,18 @@ const Signin = ({ navigation }) => {
     await authStore.signin(user, navigation);
   };
 
+  const passwordInput = useRef();
   return (
     <VStack style={styles.container}>
       <Text style={{ fontWeight: "bold" }}>Signin</Text>
       <VStack>
         <Text style={styles.title}>Username:</Text>
         <TextInput
+          placeholder="username"
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            passwordInput.current.focus();
+          }}
           style={styles.input}
           onChangeText={(value) => setUser({ ...user, username: value })}
         />
@@ -26,6 +32,10 @@ const Signin = ({ navigation }) => {
       <VStack>
         <Text style={styles.title}>Password:</Text>
         <TextInput
+          ref={passwordInput}
+          placeholder="Password"
+          returnKeyType="send"
+          onSubmitEditing={handleSubmit}
           style={styles.input}
           secureTextEntry
           onChangeText={(value) => setUser({ ...user, password: value })}

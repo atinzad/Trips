@@ -4,12 +4,18 @@ import { Avatar, Button, Divider, HStack, VStack } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 import EditProfile from "./EditProfile";
 import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
+import profileStore from "../../stores/profileStore";
 
 const ProfileView = ({ user }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const handleModal = () => {
     setIsOpenModal(true);
   };
+  const [profile, setProfile] = useState(
+    profileStore.getProfileFromId(user.profile)
+  );
+
   return (
     <VStack style={styles.container}>
       <HStack style={styles.topContainer}>
@@ -44,22 +50,24 @@ const ProfileView = ({ user }) => {
           </Text>
         </VStack>
       </HStack>
-      <Text style={styles.bio}>
-        bio: {"   "}
-        {"this is the bio"}
-      </Text>
+      <Text style={styles.bio}>bio: {profile.bio}</Text>
       <Divider my="3" />
       <View style={styles.line} />
       <Text style={styles.trips}>
         Trips: {"   "}
         {"this is the trips"}
       </Text>
-      <EditProfile isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <EditProfile
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        profile={profile}
+        setProfile={setProfile}
+      />
     </VStack>
   );
 };
 
-export default ProfileView;
+export default observer(ProfileView);
 
 const styles = StyleSheet.create({
   container: {

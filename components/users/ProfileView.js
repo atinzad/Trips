@@ -4,6 +4,7 @@ import { Avatar, Button, Divider, HStack, VStack } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 import EditProfile from "./EditProfile";
 import authStore from "../../stores/authStore";
+import { Feather } from "@expo/vector-icons";
 
 const ProfileView = ({ user }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -14,7 +15,7 @@ const ProfileView = ({ user }) => {
     <VStack style={styles.container}>
       <HStack style={styles.topContainer}>
         <VStack>
-          <Avatar
+          {/* <Avatar
             bgColor="white"
             style={styles.pic}
             size="xl"
@@ -22,11 +23,16 @@ const ProfileView = ({ user }) => {
               // uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg",
               uri: "",
             }}
-          >
-            <FontAwesome name="user-circle-o" size={90} color="black" />
-          </Avatar>
+          ></Avatar> */}
+          <FontAwesome name="user-circle-o" size={90} color="black" />
           {user === authStore.user && (
-            <Button onPress={handleModal}>Edit Profile</Button>
+            <Feather
+              onPress={handleModal}
+              style={styles.icon}
+              name="edit"
+              size={30}
+              color="black"
+            />
           )}
         </VStack>
         <VStack style={styles.userContainer}>
@@ -80,6 +86,10 @@ const styles = StyleSheet.create({
   },
   pic: {
     backgroundColor: "white",
+  },
+  icon: {
+    left: 30,
+    top: 15,
   },
   userContainer: {
     flex: 1,

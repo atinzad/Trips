@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     position: "relative",
+    borderRadius: 20,
   },
   shadow: {
     position: "absolute",
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.450)",
     bottom: 10,
     zIndex: 1,
+    borderRadius: 20,
   },
   title: {
     position: "absolute",

@@ -1,11 +1,17 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 
 const EditTripButton = () => {
   return (
     <View>
-      <Feather style={styles.icon} name="edit" size={50} color="black" />
+      <Feather
+        onPress={() => Alert.alert("hi")}
+        style={styles.icon}
+        name="edit"
+        size={50}
+        color="black"
+      />
     </View>
   );
 };

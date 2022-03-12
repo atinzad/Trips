@@ -22,14 +22,16 @@ class ProfileStore {
   };
 
   updateProfile = async (profile) => {
+    const updateProfile = { image: profile.image, bio: profile.bio };
     try {
-      const response = await instance.put(`/profiles/${profile._id}`, profile);
+      const response = await instance.put(
+        `/profiles/${profile._id}`,
+        updateProfile
+      );
       if (response) {
         this.profiles = this.profiles.map((prof) =>
           prof._id === profile._id ? profile : prof
         );
-
-        const user = userStore.getUserFromId(profile.owner);
       }
     } catch (error) {}
   };

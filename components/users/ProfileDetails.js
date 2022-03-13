@@ -26,16 +26,18 @@ const ProfileDetails = ({ route }) => {
     <VStack style={styles.container}>
       <HStack style={styles.topContainer}>
         <VStack>
-          {/* <Avatar
-            bgColor="white"
-            style={styles.pic}
-            size="xl"
-            source={{
-              // uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg",
-              uri: "",
-            }}
-          ></Avatar> */}
-          <FontAwesome name="user-circle-o" size={90} color="black" />
+          {profile.image === "" ? (
+            <FontAwesome name="user-circle-o" size={90} color="black" />
+          ) : (
+            <Avatar
+              bgColor="white"
+              style={styles.pic}
+              size="xl"
+              source={{
+                uri: profile.image,
+              }}
+            ></Avatar>
+          )}
           {user._id === authStore.user._id && (
             <Feather
               onPress={handleModal}

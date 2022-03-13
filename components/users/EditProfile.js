@@ -30,12 +30,20 @@ const EditProfile = ({ isOpenModal, setIsOpenModal, profile, setProfile }) => {
         }}
       >
         <VStack style={styles.container}>
-          <Text style={styles.bio}>Current Bio: {profile.bio}</Text>
+          <Text style={styles.bio}>Bio:</Text>
           <TextInput
             style={styles.input}
-            placeholder={profile.bio}
+            value={updatedProfile.bio}
             onChangeText={(value) =>
               setUpdatedProfile({ ...updatedProfile, bio: value })
+            }
+          />
+          <Text style={styles.bio}>Image URL:</Text>
+          <TextInput
+            style={styles.input}
+            value={updatedProfile.image}
+            onChangeText={(value) =>
+              setUpdatedProfile({ ...updatedProfile, image: value })
             }
           />
           <HStack>

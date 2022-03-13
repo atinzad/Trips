@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
 import { configure } from "mobx";
+import profileStore from "./profileStore";
 
 configure({
   enforceActions: "never",
@@ -20,6 +21,7 @@ class AuthStore {
   setUser = async (token) => {
     try {
       const decodedToken = decode(token);
+      console.log("decodedToken", decodedToken);
       this.user = decodedToken;
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 
@@ -32,10 +34,14 @@ class AuthStore {
 
   signup = async (user, navigation) => {
     try {
+      console.log(user);
       const res = await instance.post("/users/signup", user);
       const { token } = res.data;
+      console.log(token);
 
       await this.setUser(token);
+      profileStore.fetchProfiles();
+
       navigation.replace("Home");
     } catch (error) {
       console.log(error);

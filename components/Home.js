@@ -3,12 +3,16 @@ import React from "react";
 import testStore from "../stores/testStore";
 import { Button } from "native-base";
 import { observer } from "mobx-react";
+import authStore from "../stores/authStore";
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-
+      {authStore.user ? (
+        <Text>Hello {authStore.user.username}</Text>
+      ) : (
+        <Text>Home</Text>
+      )}
       <Button style={styles.btn} onPress={() => navigation.navigate("Explore")}>
         Explore
       </Button>

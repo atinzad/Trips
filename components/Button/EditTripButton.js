@@ -2,11 +2,11 @@ import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 
-const EditTripButton = () => {
+const EditTripButton = ({ handleModal }) => {
   return (
     <View>
       <Feather
-        onPress={() => Alert.alert("hi")}
+        onPress={handleModal}
         style={styles.icon}
         name="edit"
         size={50}

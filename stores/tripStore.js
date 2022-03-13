@@ -1,6 +1,11 @@
 import { instance } from "./instance";
 import { makeAutoObservable } from "mobx";
 import authStore from "./authStore";
+import { configure } from "mobx";
+
+configure({
+  enforceActions: "never",
+});
 
 class TripStore {
   trips = [];
@@ -46,16 +51,17 @@ class TripStore {
     }
   };
 
-  updateTrip = async (updatedTrip) => {
+  updateTrip = async (updatedTrip, id) => {
     try {
-      const response = await instance.put(
-        `/trips/${updatedTrip._id}`,
-        updatedTrip
-      );
+      const newTrip = {
+        description: updatedTrip.description,
+        title: updatedTrip.title,
+      };
+      const response = await instance.put(`/trips/${id}`, newTrip);
       if (response) {
-        this.trips = this.trips.map((trip) =>
-          trip._id === updatedTrip._id ? updatedTrip : trip
-        );
+        this.trips = this.trips.map((trip) => {
+          return trip._id === id ? updatedTrip : trip;
+        });
       }
     } catch (error) {
       console.log(

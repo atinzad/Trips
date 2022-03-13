@@ -30,8 +30,6 @@ const Signup = ({ navigation }) => {
   return (
     <VStack style={styles.container}>
       <KeyboardAvoidingView behavior="position">
-        <Text style={{ left: "42%", fontWeight: "bold" }}>Signup</Text>
-
         <VStack>
           <Text style={styles.title}>Username:</Text>
           <TextInput
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    bottom: 100,
+    bottom: 0,
   },
 
   input: {

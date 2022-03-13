@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, Pressable, Dimensions } from "react-native";
 import React from "react";
 import { Button, Divider, HStack, VStack } from "native-base";
 import { View } from "react-native-web";
+import { observer } from "mobx-react";
 
 const TripItem = ({ trip, navigation }) => {
   return (
@@ -23,7 +24,7 @@ const TripItem = ({ trip, navigation }) => {
   );
 };
 
-export default TripItem;
+export default observer(TripItem);
 
 const styles = StyleSheet.create({
   container: {

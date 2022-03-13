@@ -4,6 +4,12 @@ import { instance } from "./instance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
+import { configure } from "mobx";
+
+configure({
+  enforceActions: "never",
+});
+
 class AuthStore {
   user = null;
 
@@ -16,8 +22,6 @@ class AuthStore {
       const decodedToken = decode(token);
       this.user = decodedToken;
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-
-      
 
       await AsyncStorage.setItem("token", token);
       return this.user;

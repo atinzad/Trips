@@ -17,6 +17,8 @@ import TripDetail from "../components/trips/TripDetail";
 import Profile from "../components/users/Profile";
 
 import AddTrip from "../components/trips/AddTrip";
+import ProfileView from "../components/users/ProfileView";
+import ProfileDetails from "../components/users/ProfileDetails";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -49,6 +51,7 @@ const RootNavigator = () => {
       <Screen name="Signup" component={Signup} />
       <Screen name="Signin" component={Signin} />
       <Screen name="Profile" component={Profile} />
+      <Screen name="ProfileDetails" component={ProfileDetails} />
       <Screen name="TripDetail" component={TripDetail} />
       <Screen name="AddTrip" component={AddTrip} />
     </Navigator>

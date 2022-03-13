@@ -11,10 +11,9 @@ import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
 import TripListProfile from "./TripListProfile";
 
-const ProfileView = ({ user, route }) => {
-  if (!user) {
-    const { user } = route.params;
-  }
+const ProfileDetails = ({ route }) => {
+  const { user } = route.params;
+
   const [isOpenModal, setIsOpenModal] = useState(false);
   const handleModal = () => {
     setIsOpenModal(true);
@@ -76,7 +75,7 @@ const ProfileView = ({ user, route }) => {
   );
 };
 
-export default observer(ProfileView);
+export default observer(ProfileDetails);
 
 const styles = StyleSheet.create({
   container: {

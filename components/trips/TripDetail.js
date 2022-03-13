@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Button, HStack, VStack } from "native-base";
 import { observer } from "mobx-react";
 import { AntDesign } from "@expo/vector-icons";
@@ -16,20 +16,26 @@ import EditTripButton from "../Button/EditTripButton";
 import tripStore from "../../stores/tripStore";
 import { useNavigation } from "@react-navigation/native";
 import authStore from "../../stores/authStore";
+import EditTrip from "./EditTrip";
 
 const TripDetail = ({ route }) => {
-  const { trip } = route.params;
+  // const { trip } = route.params;
+  const [trip, setTrip] = useState(route.params.trip);
 
   const navigation = useNavigation();
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const handleModal = () => {
+    setIsOpenModal(true);
+  };
 
   const handleDelete = () => {
     tripStore.deleteTrip(trip._id);
     navigation.navigate("Explore");
   };
 
-  const handleUpdate = () => {
-    tripStore.updateTrip(trip);
-    navigation.navigate("Explore");
+  const handleProfileView = () => {
+    navigation.navigate("ProfileDetails", { user: trip.owner });
   };
 
   return (
@@ -41,19 +47,30 @@ const TripDetail = ({ route }) => {
         }}
       />
       <Text style={styles.title}>{trip.title}</Text>
-      <Text style={styles.owner}>Trip by: {trip.owner.username}</Text>
+      <HStack>
+        <Text style={styles.owner}>Trip by: </Text>
+        <Button onPress={handleProfileView} style={styles.btn}>
+          {trip.owner.username}
+        </Button>
+      </HStack>
       <Text style={styles.description}>{trip.description}</Text>
       {authStore.user && authStore.user._id === trip.owner._id && (
         <HStack style={styles.icon}>
           <RemoveTripButton handleDelete={handleDelete}></RemoveTripButton>
-          <EditTripButton></EditTripButton>
+          <EditTripButton handleModal={handleModal}></EditTripButton>
         </HStack>
       )}
+      <EditTrip
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        trip={trip}
+        setTrip={setTrip}
+      />
     </VStack>
   );
 };
 
-export default TripDetail;
+export default observer(TripDetail);
 
 const styles = StyleSheet.create({
   container: {
@@ -89,5 +106,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     right: "13%",
+  },
+  btn: {
+    right: 250,
   },
 });

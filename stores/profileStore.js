@@ -1,7 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 import userStore from "./userStore";
+import { configure } from "mobx";
 
+configure({
+  enforceActions: "never",
+});
 class ProfileStore {
   profiles = [];
   constructor() {
